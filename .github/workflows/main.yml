@@ -20,9 +20,9 @@ jobs:
         with:
           extended: true
       - name: Create site search index
-        run: cat ~/public/index.json | node ~/scripts/lunr/site-index.js > ~/public/js/site-search-index.json
+        run: cat public/index.json | node scripts/lunr/site-index.js > public/js/site-search-index.json
       - name: Create blog search index
-        run: cat ~/public/blog/index.json | node ~/scripts/lunr/blog-index.js > ~/public/js/blog-search-index.json
+        run: cat public/blog/index.json | node scripts/lunr/blog-index.js > public/js/blog-search-index.json
       - name: Copy atom feed in place
         run: cp public/blog/atom.xml public/atom.xml
       - name: Copy more feeds in place
@@ -30,4 +30,4 @@ jobs:
       - name: Deploy
         run: >
             | echo "so far so good"        
-            | ls -l ~/public
+            | ls -l public
