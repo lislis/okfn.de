@@ -19,6 +19,8 @@ jobs:
         uses: peaceiris/actions-hugo@v2.4.13
         with:
           extended: true
+      - run: hugo
+      - run: pwd
       - name: Create site search index
         run: cat public/index.json | node scripts/lunr/site-index.js > public/js/site-search-index.json
       - name: Create blog search index
