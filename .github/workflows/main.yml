@@ -40,7 +40,7 @@ jobs:
           cd release
 
           echo "Shallow-cloning release\n"
-          git clone --no-checkout --quiet --branch=release --depth 1 https://${{secrets.GITHUB_TOKEN}}@github.com/${GITHUB_REPOSITORY}.git .
+          git clone --no-checkout --quiet --branch=release --depth 1 https://${{secrets.GITHUB_TOKEN}}@github.com/${{GITHUB_REPOSITORY}}.git .
           cp -Rf $HOME/public/* .
 
           echo "Adding all changes and committing\n"
