@@ -30,8 +30,6 @@ jobs:
       - name: Copy more feeds in place
         run: mkdir public/feed/ && cp public/blog/rss.xml public/feed/index.xml
       - name: Deploy
-        run: ls -l public
-      - name: DE
         run:  |
           cp -R public $HOME/public
           cd $HOME
@@ -42,12 +40,12 @@ jobs:
           cd release
 
           echo "Shallow-cloning release\n"
-          git clone --no-checkout --quiet --branch=release --depth 1 https://${GITHUB_TOKEN}@github.com/${GH_USER}/${GH_REPO}.git .
+          git clone --no-checkout --quiet --branch=release --depth 1 https://github.com/${GITHUB_ACTOR}/${GITHUB_REPOSITORY}.git .
           cp -Rf $HOME/public/* .
 
           echo "Adding all changes and committing\n"
           git add -A .
-          git commit -m "Travis build $TRAVIS_BUILD_NUMBER" > /dev/null
+          git commit -m "Action no $GITHUB_RUN_NUMBER" > /dev/null
           echo "Pushing built site\n"
           git push -fq origin release > /dev/null
 
