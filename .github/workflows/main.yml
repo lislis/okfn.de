@@ -30,6 +30,4 @@ jobs:
       - name: Copy more feeds in place
         run: mkdir public/feed/ && cp public/blog/rss.xml public/feed/index.xml
       - name: Deploy
-        run: >
-            | echo "so far so good"        
-            | ls -l public
+        run: ls -l public
