@@ -31,3 +31,24 @@ jobs:
         run: mkdir public/feed/ && cp public/blog/rss.xml public/feed/index.xml
       - name: Deploy
         run: ls -l public
+      - name: DE
+        run:  |
+          cp -R public $HOME/public
+          cd $HOME
+          git config --global user.email "gh@gh-actions"
+          git config --global user.name "GH Action"
+
+          mkdir release
+          cd release
+
+          echo "Shallow-cloning release\n"
+          git clone --no-checkout --quiet --branch=release --depth 1 https://${GITHUB_TOKEN}@github.com/${GH_USER}/${GH_REPO}.git .
+          cp -Rf $HOME/public/* .
+
+          echo "Adding all changes and committing\n"
+          git add -A .
+          git commit -m "Travis build $TRAVIS_BUILD_NUMBER" > /dev/null
+          echo "Pushing built site\n"
+          git push -fq origin release > /dev/null
+
+          echo "Done updating release\n"
